@@ -1,0 +1,36 @@
+with open('input.txt') as f:
+    a = []
+    for line in f:
+        a.append(line.split())
+n =  sum(a, [])
+base = int(n[-1])
+op = n[-2]
+n = [int(i, base) for i in n[:-2]]
+res = 0
+if op == '+':
+    res = sum(n)
+elif op == '-':
+    a1 = n[0]
+    for i in n[1:]:
+        a1 -= i
+    res = a1
+elif op == '*':
+    a1 = 1
+    for i in n:
+        a1 *= i
+    res = a1
+
+def to_base(x, base):       # как расширить с десятиричной до любой
+    if x == 0:
+        return '0'
+    neg = x < 0 
+    x = abs(x)
+    digits = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    result = ''
+    while x > 0:
+        result = digits[x % base] + result
+        x //= base
+    return ('-' if neg else '') + result
+
+with open('output.txt', 'w') as g:
+    g.write(to_base(res, base))

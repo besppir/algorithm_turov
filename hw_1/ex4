@@ -1,0 +1,22 @@
+with open('input.txt') as f:
+    a = []
+    for line in f:
+        a.append(line.split())
+n =  sum(a, [])
+op = n[-1]
+n = list(map(int, n[0:-1]))
+res = 0
+if op == '+':
+    res = sum(n)
+elif op == '-':
+    a1 = n[0]
+    for i in n[1:]:
+        a1 -= i
+    res = a1
+elif op == '*':
+    a1 = 1
+    for i in n:
+        a1 *= i
+    res = a1
+with open('output.txt', 'w') as g:
+    g.write(str(res))

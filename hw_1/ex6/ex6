@@ -1,0 +1,39 @@
+with open('input.txt') as f:
+    a = []
+    for line in f:
+        a.append(line.split())
+n =  sum(a, [])
+base = int(n[-1])
+op = n[-2]
+n = [int(i, base) for i in n[:-2]]
+res = 0
+if op == '+':
+    res = sum(n)
+elif op == '-':
+    a1 = n[0]
+    for i in n[1:]:
+        a1 -= i
+    res = a1
+elif op == '*':
+    a1 = 1
+    for i in n:
+        a1 *= i
+    res = a1
+
+def to_base(x, base):
+    if x == 0:
+        return '0'
+    res = ''
+    if x > 0:
+        while x > 0:
+            res = str(x % base) + res
+            x //= base
+        return res
+    if x < 0:
+        x = -x
+        while x > 0:
+            res = str(x % base) + res
+            x //= base
+        return '-' + res
+with open('output.txt', 'w') as g:
+    g.write(to_base(res, base))
